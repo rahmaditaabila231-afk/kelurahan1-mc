@@ -34,7 +34,25 @@ class SuratController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 1. Eksekusi Aturan Validasi Server-Side 
+    $validatedData = $request->validate([ 
+        'nomor_surat' => 'required|unique:surats,nomor_surat|max:50', 
+        'jenis_surat' => 'required', 
+        'penduduk_id' => 'required|numeric', 
+        'tanggal_ajuan' => 'required|date', 
+    ], [ 
+        'nomor_surat.required' => 'Nomor surat wajib diisi.', 
+        'nomor_surat.unique' => 'Nomor surat tersebut sudah terdaftar di sistem.', 
+        'jenis_surat.required' => 'Silakan pilih jenis surat.', 
+        'penduduk_id.required' => 'Warga pemohon wajib dipilih.', 
+    ]); 
+ 
+    // 2. Simpan ke Database Menggunakan Mass Assignment Eloquent 
+    Surat::create($validatedData); 
+ 
+    // 3. Redirect dengan Flash Session     
+    return redirect()->route('surat.index')->with('sukses', 'Surat permohonan berhasil disimpan!');
+
     }
 
     /**
