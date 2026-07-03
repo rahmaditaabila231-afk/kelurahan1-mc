@@ -16,7 +16,7 @@ class AuthController extends Controller
     }
  
     // 2. Memproses Validasi dan Pencocokan Kredensial Login
-    public function processLogin(Request $request) {
+    public function processLogin( Request $request) {
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'

@@ -28,9 +28,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     // Penanganan Aksi Keluar Aplikasi
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
- 
+    Route::get('/surat/{id}/cetak', [SuratController::class, 'cetakPdf'])->name('surat.cetak');
     // Proteksi Total Rute CRUD Surat Aplikasi Simpel-K dari Serangan Manipulasi Tembak URL
-    // Route::resource('surat', SuratController::class);
     Route::resource('surat', SuratController::class);
 });
 

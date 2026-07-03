@@ -8,11 +8,14 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Daftar Pengajuan Surat Kelurahan</h3>
         
+        
         <!-- BUTTON TAMBAH: Mengarah ke rute surat.create -->
         <a href="{{ route('surat.create') }}" class="btn btn-primary btn-sm">
             <i class="fas fa-plus-circle-notch mr-1"></i> Tambah Pengajuan Surat
         </a>
+
     </div>
+    
 
     <!-- FLASH SESSION: Menampilkan notifikasi sukses setelah redirect -->
     @if(session('sukses'))
@@ -76,6 +79,12 @@
 
 <td>
     <div class="btn-group" role="group">
+        <!-- Tombol Cetak -->
+        <a href="{{ route('surat.cetak', $s->id) }}"class="btn btn-primary btn-sm"
+        target="_blank">
+            <i class="fas fa-print"></i> Cetak PDF
+        </a>
+        
         <!-- Tombol Menuju Halaman Edit -->
         <a href="{{ route('surat.edit', $s->id) }}" class="btn btn-warning btn-sm">
             <i class="fas fa-edit"></i> Edit
